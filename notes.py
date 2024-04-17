@@ -11,33 +11,33 @@ def make_note(note_head, note_main, id):
     return note
 
 def read_note(file_path, id):
-        with open(file_path, 'r') as csvfile:
+        with open(file_path, 'r',encoding="utf-8") as csvfile:
             spamreader = csv.reader(csvfile,delimiter=';')
             for row in spamreader:
                 if (row[0] == str(id) or (row[1] == id)):
                      print(row)
 
 def read_notes(file_path, date1, date2):
-     with open(file_path, 'r') as csvfile:
+     with open(file_path, 'r',encoding="utf-8") as csvfile:
           spamreader = csv.reader(csvfile, delimiter=';')
           for row in spamreader:
                if (datetime.datetime.strptime(row[-1], '%Y-%m-%d %H:%M') > datetime.datetime.strptime(date1, '%Y-%m-%d %H:%M')) and (datetime.datetime.strptime(row[-1], '%Y-%m-%d %H:%M') < datetime.datetime.strptime(date2, '%Y-%m-%d %H:%M')):
                     print(row)
 
 def append_note(file_path, note):
-     with open(file_path, 'a', newline='') as csvfile:
+     with open(file_path, 'a', newline='',encoding="utf-8") as csvfile:
           spamwriter = csv.writer(csvfile,delimiter=';')
           spamwriter.writerow(note)
 
 def remove_note(file_path, string):
-     csvfile = open(file_path, 'r')
+     csvfile = open(file_path, 'r',encoding="utf-8")
      spamreader = csv.reader(csvfile,delimiter=';')
      spamreader_list = list()
      for row in spamreader:
           spamreader_list.append(row)
 
      csvfile.close()
-     csvfile = open(file_path,'w',newline='')
+     csvfile = open(file_path,'w',newline='',encoding="utf-8")
      spamwriter = csv.writer(csvfile, delimiter=';')
      for row in spamreader_list:
           if ((row[0] != string and row[0] != str(string)) and row[1] != string):
